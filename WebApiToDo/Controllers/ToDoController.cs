@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApiToDo.ModelsDTO;
 using WebApiToDo.Services.Interfaces;
@@ -21,7 +18,7 @@ namespace WebApiToDo.Controllers
         }
 
         [HttpGet]
-        [Route("/api/todo/")]
+        [Route("/todo")]
         public async Task<ActionResult<IEnumerable<ToDoDTO>>> GetAllItemsAsync()
         {
             var result = await _toDoService.GetAllAsync();
@@ -29,7 +26,7 @@ namespace WebApiToDo.Controllers
         }
 
         [HttpGet]
-        [Route("/api/todo/{isCompleted}")]
+        [Route("/todo/{isCompleted}")]
         public async Task<ActionResult<IEnumerable<ToDoDTO>>> GetAllItemsFilterAsync(bool isCompleted)
         {
             var result = await _toDoService.GetAllItemsFilterAsync(isCompleted);
@@ -37,7 +34,7 @@ namespace WebApiToDo.Controllers
         }
 
         [HttpPost]
-        [Route("/api/todo")]
+        [Route("/todo")]
         public async Task<ActionResult> AddItemAsync(ToDoDTO toDoDTO)
         {
             if (!ModelState.IsValid)
@@ -50,7 +47,7 @@ namespace WebApiToDo.Controllers
         }
 
         [HttpDelete]
-        [Route("/api/todo/{id}")]
+        [Route("/todo/{id}")]
         public async Task<ActionResult> DeleteItemAsync(int id)
         {
             var result = await _toDoService.DeleteItemAsync(id);
@@ -58,17 +55,19 @@ namespace WebApiToDo.Controllers
             {
                 return NotFound();
             }
-            return Ok();
+
+            return Ok();        
         }
 
         [HttpPut]
-        [Route("/api/todo/{id}")]
+        [Route("/todo/{id}")]
         public async Task<IActionResult> UpdateItemAsync(int id, ToDoDTO toDoDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }       
+            }  
+            
             await _toDoService.UpdateItemAsync(id, toDoDTO);
             return Ok(toDoDTO);           
         }

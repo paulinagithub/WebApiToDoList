@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebApiToDo.Models;
 using WebApiToDo.ModelsDTO;
 using WebApiToDo.Repositories.Interfaces;
+using WebApiToDo.Services.Helpers;
 using WebApiToDo.Services.Interfaces;
 
 namespace WebApiToDo.Services
@@ -19,18 +19,17 @@ namespace WebApiToDo.Services
         {
             _toDoRepository = toDoRepository ?? throw new ArgumentNullException(nameof(toDoRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-
         }
 
         public async Task<List<ToDoDTO>> GetAllAsync()
         {
-            var toDoList = await _toDoRepository.ListAllAsync();
+            var toDoList = await _toDoRepository.GetAllAsync();
             return _mapper.Map<List<ToDoDTO>>(toDoList);
         }
 
         public async Task<List<ToDoDTO>> GetAllItemsFilterAsync(bool isCompleted)
         {
-            var toDoList = await _toDoRepository.ListAllItemsFilterAsync(ConvertBoolToInt(isCompleted));
+            var toDoList = await _toDoRepository.GetAllItemsFilterAsync(ServiceHelpers.ConvertBoolToInt(isCompleted));
             return _mapper.Map<List<ToDoDTO>>(toDoList);
         }
 
@@ -56,11 +55,6 @@ namespace WebApiToDo.Services
             var toDoModel = _mapper.Map<ToDoModel>(todo);
             toDoModel.Id = id;
             await _toDoRepository.UpdateToDoAsync(toDoModel);
-        }
-
-        private int ConvertBoolToInt(bool boolValue)
-        {
-            return Convert.ToInt32(boolValue);
         }
     }
 }

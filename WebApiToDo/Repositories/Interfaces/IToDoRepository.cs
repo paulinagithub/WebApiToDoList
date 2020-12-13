@@ -11,7 +11,7 @@ namespace WebApiToDo.Repositories.Interfaces
         /// <summary>
         /// Return list with all items
         /// </summary>
-        Task<List<ToDoModel>> ListAllAsync();
+        Task<List<ToDoModel>> GetAllAsync();
         /// <summary>
         /// Add item to DB
         /// </summary>
@@ -36,6 +36,6 @@ namespace WebApiToDo.Repositories.Interfaces
         /// Return list of all elements filter by given parameters 
         /// </summary>
         /// <param name="isCompleted"></param>
-        Task<List<ToDoModel>> ListAllItemsFilterAsync(int isCompleted);
+        Task<List<ToDoModel>> GetAllItemsFilterAsync(int isCompleted);
     }
 }

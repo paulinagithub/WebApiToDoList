@@ -10033,9 +10033,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Paulina\\source\\repos\\WebApiToDo\\XUnitTest\\WebApiToDoTests.csproj",
-      "projectName": "WebApiToDoTests",
-      "projectPath": "C:\\Users\\Paulina\\source\\repos\\WebApiToDo\\XUnitTest\\WebApiToDoTests.csproj",
+      "projectUniqueName": "C:\\Users\\Paulina\\source\\repos\\WebApiToDo\\XUnitTest\\WebApiToDoTests1.csproj",
+      "projectName": "WebApiToDoTests1",
+      "projectPath": "C:\\Users\\Paulina\\source\\repos\\WebApiToDo\\XUnitTest\\WebApiToDoTests1.csproj",
       "packagesPath": "C:\\Users\\Paulina\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Paulina\\source\\repos\\WebApiToDo\\XUnitTest\\obj\\",
       "projectStyle": "PackageReference",

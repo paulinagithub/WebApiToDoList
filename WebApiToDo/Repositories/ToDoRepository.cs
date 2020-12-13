@@ -20,12 +20,12 @@ namespace WebApiToDo.Repositories
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<List<ToDoModel>> ListAllAsync()
+        public async Task<List<ToDoModel>> GetAllAsync()
         {
             return await _dbContext.ToDo.ToListAsync();
         }
 
-        public async Task<List<ToDoModel>> ListAllItemsFilterAsync(int isCompleted)
+        public async Task<List<ToDoModel>> GetAllItemsFilterAsync(int isCompleted)
         {
             return await _dbContext.ToDo.Where(w => w.IsCompleted == isCompleted).ToListAsync();
         }

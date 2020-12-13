@@ -7,7 +7,6 @@ using WebApiToDo.Models;
 using WebApiToDo.ModelsDTO;
 using WebApiToDo.Repositories.Interfaces;
 using WebApiToDo.Services;
-using WebApiToDo.Services.Interfaces;
 using Xunit;
 
 namespace WebApiToDo.Test

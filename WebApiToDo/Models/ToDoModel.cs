@@ -14,6 +14,5 @@ namespace WebApiToDo.Models
         public string Description { get; set; }
 
         public int IsCompleted { get; set; }
-
     }
 }
