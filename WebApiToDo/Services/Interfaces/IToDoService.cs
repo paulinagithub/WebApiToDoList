@@ -9,9 +9,13 @@ namespace WebApiToDo.Services.Interfaces
     public interface IToDoService
     {
         Task AddItemAsync(ToDoDTO todoModel);
+
         Task<bool> DeleteItemAsync(int id);
-        Task<List<ToDoDTO>> GetAllAsync();
+
+        Task<List<ToDoDTO>> GetAllItemsAsync();
+
         Task<List<ToDoDTO>> GetAllItemsFilterAsync(bool isCompleted);
+
         Task UpdateItemAsync(int id, ToDoDTO todo);
     }
 }

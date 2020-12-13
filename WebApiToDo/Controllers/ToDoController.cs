@@ -6,7 +6,6 @@ using WebApiToDo.Services.Interfaces;
 
 namespace WebApiToDo.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
     public class ToDoController : ControllerBase
     {
@@ -21,7 +20,7 @@ namespace WebApiToDo.Controllers
         [Route("/todo")]
         public async Task<ActionResult<IEnumerable<ToDoDTO>>> GetAllItemsAsync()
         {
-            var result = await _toDoService.GetAllAsync();
+            var result = await _toDoService.GetAllItemsAsync();
             return Ok(result);
         }
 
@@ -51,6 +50,7 @@ namespace WebApiToDo.Controllers
         public async Task<ActionResult> DeleteItemAsync(int id)
         {
             var result = await _toDoService.DeleteItemAsync(id);
+
             if (!result)
             {
                 return NotFound();

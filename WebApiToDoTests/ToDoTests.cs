@@ -17,18 +17,12 @@ namespace WebApiToDoTests
     {
         private readonly Mock<IToDoRepository> _toDoRepositoryMock;
 
-        private static readonly ToDoModel _toDoExample = new ToDoModel
+        private static readonly ToDoModel _toDoExample = new ToDoModel 
         {
             Id = 1,
             Title = "New Button",
             Description = "Create new button",
             IsCompleted = 0
-        };
-
-        private static readonly List<ToDoModel> _toDosExample = new List<ToDoModel>
-        {
-            new ToDoModel { Id = 1, Title = "New Button", Description = "Create new button", IsCompleted = 0},
-            new ToDoModel { Id = 1, Title = "New check list", Description = "Create new check list", IsCompleted = 0}
         };
 
         private static readonly ToDoDTO _toDoDTOExample = new ToDoDTO
@@ -37,6 +31,12 @@ namespace WebApiToDoTests
             Description = "Create new button",
             IsCompleted = true
         };
+
+        private static readonly List<ToDoModel> _toDosExample = new List<ToDoModel>
+        {
+            new ToDoModel { Id = 1, Title = "New Button", Description = "Create new button", IsCompleted = 0},
+            new ToDoModel { Id = 1, Title = "New check list", Description = "Create new check list", IsCompleted = 0}
+        };     
 
         public ToDoTests()
         {
@@ -47,8 +47,9 @@ namespace WebApiToDoTests
         public void GetAllItemsWithTwoElements()
         {
             // Arrange 
+
             _toDoRepositoryMock
-                .Setup(repo => repo.GetAllAsync())
+                .Setup(repo => repo.GetAllItemsAsync())
                 .Returns(Task.FromResult(_toDosExample));
 
             var mapper = GetMapperMock();
@@ -56,9 +57,11 @@ namespace WebApiToDoTests
             var toDoService = new ToDoService(_toDoRepositoryMock.Object, mapper);
 
             // Act 
-            var allItemList = toDoService.GetAllAsync();
+
+            var allItemList = toDoService.GetAllItemsAsync();
 
             // Assert  
+
             Assert.Equal(2, allItemList.Result.Count);
         }
 
@@ -66,6 +69,7 @@ namespace WebApiToDoTests
         public void GetAllItemsWithFalseArgument()
         {
             // Arrange 
+
             var expectedValue = new List<ToDoModel>()
             {
                 _toDoExample
@@ -80,9 +84,11 @@ namespace WebApiToDoTests
             var toDoService = new ToDoService(_toDoRepositoryMock.Object, mapper);
 
             // Act 
+
             var allItemList = toDoService.GetAllItemsFilterAsync(false);
 
-            // Assert  
+            // Assert 
+            
             Assert.Equal(1, allItemList.Result.Count);
         }
 
@@ -90,6 +96,7 @@ namespace WebApiToDoTests
         public void DeleteIfItemIsExist()
         {
             // Arrange 
+
             _toDoRepositoryMock
                 .Setup(repo => repo.DeleteItemAsync(It.IsAny<ToDoModel>()));
 
@@ -102,9 +109,11 @@ namespace WebApiToDoTests
             var toDoService = new ToDoService(_toDoRepositoryMock.Object, mapper);
 
             // Act 
-            var allItemList = toDoService.DeleteItemAsync(1);
 
-            // Assert  
+            var allItemList = toDoService.DeleteItemAsync(It.IsAny<int>());
+
+            // Assert 
+            
             Assert.True(allItemList.Result);
         }
 
@@ -112,6 +121,7 @@ namespace WebApiToDoTests
         public void DeleteIfItemIsNotExist()
         {
             // Arrange 
+
             _toDoRepositoryMock
                 .Setup(repo => repo.DeleteItemAsync(It.IsAny<ToDoModel>()));
 
@@ -120,9 +130,11 @@ namespace WebApiToDoTests
             var toDoService = new ToDoService(_toDoRepositoryMock.Object, mapper);
 
             // Act 
-            var allItemList = toDoService.DeleteItemAsync(1);
+
+            var allItemList = toDoService.DeleteItemAsync(It.IsAny<int>());
 
             // Assert  
+
             Assert.False(allItemList.Result);
         }
 
@@ -130,6 +142,7 @@ namespace WebApiToDoTests
         public async void UpdateItemWithException()
         {
             // Arrange 
+
             _toDoRepositoryMock
                 .Setup(repo => repo.UpdateToDoAsync(It.IsAny<ToDoModel>()))
                 .Returns(Task.FromException(new DbUpdateException()));
@@ -139,9 +152,11 @@ namespace WebApiToDoTests
             var toDoService = new ToDoService(_toDoRepositoryMock.Object, mapper);
 
             // Act 
+
             Task allItemList() => toDoService.UpdateItemAsync(It.IsAny<int>(), _toDoDTOExample);
 
             // Assert  
+
             await Assert.ThrowsAsync<DbUpdateException>(allItemList);
         }
 

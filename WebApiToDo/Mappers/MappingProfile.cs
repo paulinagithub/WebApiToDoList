@@ -12,6 +12,7 @@ namespace WebApiToDo.Mappers
             //ToDo Mapper
             CreateMap<ToDoModel, ToDoDTO>()
                  .ForMember(dest => dest.IsCompleted, opt => opt.MapFrom(src => Convert.ToBoolean(src.IsCompleted)));
+
             CreateMap<ToDoDTO, ToDoModel>()
                 .ForMember(dest => dest.IsCompleted, opt => opt.MapFrom(src => Convert.ToInt32(src.IsCompleted)));
         }

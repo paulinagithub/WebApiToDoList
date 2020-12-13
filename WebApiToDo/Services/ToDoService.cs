@@ -21,9 +21,9 @@ namespace WebApiToDo.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<List<ToDoDTO>> GetAllAsync()
+        public async Task<List<ToDoDTO>> GetAllItemsAsync()
         {
-            var toDoList = await _toDoRepository.GetAllAsync();
+            var toDoList = await _toDoRepository.GetAllItemsAsync();
             return _mapper.Map<List<ToDoDTO>>(toDoList);
         }
 
@@ -42,10 +42,12 @@ namespace WebApiToDo.Services
         public async Task<bool> DeleteItemAsync(int id)
         {
             var toDo = await _toDoRepository.FindItemByIDAsync(id);
+
             if (toDo == null)
             {
                 return false;
             }
+
             await _toDoRepository.DeleteItemAsync(toDo);
             return true;
         }

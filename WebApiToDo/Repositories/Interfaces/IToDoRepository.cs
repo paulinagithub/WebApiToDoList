@@ -11,7 +11,7 @@ namespace WebApiToDo.Repositories.Interfaces
         /// <summary>
         /// Return list with all items
         /// </summary>
-        Task<List<ToDoModel>> GetAllAsync();
+        Task<List<ToDoModel>> GetAllItemsAsync();
         /// <summary>
         /// Add item to DB
         /// </summary>
