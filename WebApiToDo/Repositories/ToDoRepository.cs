@@ -23,6 +23,10 @@ namespace WebApiToDo.Repositories
         {
             return await _dbContext.ToDo.ToListAsync();
         }
+        public async Task<List<ToDoModel>> ListAllItemsFilterAsync(int isCompleted)
+        {
+            return await _dbContext.ToDo.Where(w => w.IsCompleted == isCompleted).ToListAsync();
+        }
         public async Task AddItemAsync(ToDoModel toDo)
         {
             await _dbContext.ToDo.AddAsync(toDo);
@@ -33,6 +37,36 @@ namespace WebApiToDo.Repositories
             catch (DbUpdateException ex)
             {
                 _logger.LogError($"Adding item failed: {ex.Message}");
+                throw ex;
+            }
+        }
+        public async Task DeleteItemAsync(ToDoModel toDo)
+        {
+            _dbContext.ToDo.Remove(toDo);
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError($"Delete item failed: {ex.Message}");
+                throw ex;
+            }
+        }
+        public async Task<ToDoModel> FindItemByIDAsync(int id)
+        {
+            return await _dbContext.ToDo.FindAsync(id);
+        }
+        public async Task UpdateToDoAsync(ToDoModel todo)
+        {
+            _dbContext.ToDo.Update(todo);
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError($"Update item failed: {ex.Message}");
                 throw ex;
             }
         }

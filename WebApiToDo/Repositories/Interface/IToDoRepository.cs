@@ -10,5 +10,9 @@ namespace WebApiToDo.Repositories.Interface
     {
         Task<List<ToDoModel>> ListAllAsync();
         Task AddItemAsync(ToDoModel toDo);
+        Task DeleteItemAsync(ToDoModel toDo);
+        Task<ToDoModel> FindItemByIDAsync(int id);
+        Task UpdateToDoAsync(ToDoModel todo);
+        Task<List<ToDoModel>> ListAllItemsFilterAsync(int isCompleted);
     }
 }

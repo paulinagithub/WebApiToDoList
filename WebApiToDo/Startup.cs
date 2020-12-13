@@ -1,21 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using WebApiToDo.Models;
 using WebApiToDo.Repositories;
 using WebApiToDo.Repositories.Interface;
 using WebApiToDo.Services;
 using WebApiToDo.Services.Interface;
+
 
 namespace WebApiToDo
 {
@@ -42,6 +37,7 @@ namespace WebApiToDo
                 .AddDbContext<ToDoDBContext>();
             services.AddTransient<IToDoRepository, ToDoRepository>();
             services.AddTransient<IToDoService, ToDoService>();
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,8 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WebApiToDo.Models;
+using WebApiToDo.ModelsDTO;
 using WebApiToDo.Services.Interface;
 
 namespace WebApiToDo.Controllers
@@ -20,92 +19,49 @@ namespace WebApiToDo.Controllers
         {
             _toDoService = toDoService;
         }
-
-        // GET: api/ToDo
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ToDoModel>>> GetToDo()
+        public async Task<ActionResult<IEnumerable<ToDoDTO>>> GetAllItemsAsync()
         {
-            return await _toDoService.GetAllAsync();
+            var result = await _toDoService.GetAllAsync();
+            return Ok(result);
         }
-
-        // POST: api/ToDo
+        [HttpGet("{isCompleted}", Name = "byFilter")]
+        public async Task<ActionResult<IEnumerable<ToDoDTO>>> GetAllItemsFilterAsync(bool isCompleted)
+        {
+            var result = await _toDoService.GetAllItemsFilterAsync(isCompleted);
+            return Ok(result);
+        }
         [HttpPost]
-        public async Task<ActionResult<ToDoModel>> AddItem(ToDoModel toDo)
+        public async Task<ActionResult> AddItemAsync(ToDoDTO toDoDTO)
         {
-            await _toDoService.AddItemAsync(toDo);
-
-            return toDo;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            await _toDoService.AddItemAsync(toDoDTO);
+            return Ok(toDoDTO);
+          
         }
-
-       // DELETE: api/ToDo/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<ToDoModel>> DeleteToDo(int id)
-        //{
-        //    var toDo = await _toDoService.ToDo.FindAsync(id);
-        //    if (toDo == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _toDoService.ToDo.Remove(toDo);
-        //    await _toDoService.SaveChangesAsync();
-
-        //    return toDo;
-        //}
-
-        //    // GET: api/ToDo/5
-        //    [HttpGet("{id}")]
-        //    public async Task<ActionResult<ToDo>> GetToDo(int id)
-        //    {
-        //        var toDo = await _toDoService.ToDo.FindAsync(id);
-
-        //        if (toDo == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        return toDo;
-        //    }
-
-        //    // PUT: api/ToDo/5
-        //    // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        //    // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //    [HttpPut("{id}")]
-        //    public async Task<IActionResult> PutToDo(int id, ToDo toDo)
-        //    {
-        //        if (id != toDo.Id)
-        //        {
-        //            return BadRequest();
-        //        }
-
-        //        _toDoService.Entry(toDo).State = EntityState.Modified;
-
-        //        try
-        //        {
-        //            await _toDoService.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!ToDoExists(id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-
-        //        return NoContent();
-        //    }
-
-
-
-
-
-        //    private bool ToDoExists(int id)
-        //    {
-        //        return _toDoService.ToDo.Any(e => e.Id == id);
-        //    }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteItemAsync(int id)
+        {
+            var result = await _toDoService.DeleteItemAsync(id);
+            if (!result)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateItemAsync(int id, ToDoDTO toDoDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }       
+            await _toDoService.UpdateItemAsync(id, toDoDTO);
+            return Ok(toDoDTO);           
+        }
     }
 }
