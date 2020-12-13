@@ -159,3 +159,4 @@ C:\Users\Paulina\source\repos\WebApiToDo\WebApiToDo\obj\Debug\netcoreapp3.1\stat
 C:\Users\Paulina\source\repos\WebApiToDo\WebApiToDo\obj\Debug\netcoreapp3.1\WebApiToDo.dll
 C:\Users\Paulina\source\repos\WebApiToDo\WebApiToDo\obj\Debug\netcoreapp3.1\WebApiToDo.pdb
 C:\Users\Paulina\source\repos\WebApiToDo\WebApiToDo\obj\Debug\netcoreapp3.1\WebApiToDo.genruntimeconfig.cache
+C:\Users\Paulina\source\repos\WebApiToDo\WebApiToDo\obj\Debug\netcoreapp3.1\WebApiToDo.csprojAssemblyReference.cache
