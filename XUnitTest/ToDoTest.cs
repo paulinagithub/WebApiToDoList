@@ -1,15 +1,13 @@
 ﻿using AutoMapper;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using WebApiToDo.Mappers;
 using WebApiToDo.Models;
 using WebApiToDo.ModelsDTO;
-using WebApiToDo.Repositories.Interface;
+using WebApiToDo.Repositories.Interfaces;
 using WebApiToDo.Services;
-using WebApiToDo.Services.Interface;
+using WebApiToDo.Services.Interfaces;
 using Xunit;
 
 namespace WebApiToDo.Test

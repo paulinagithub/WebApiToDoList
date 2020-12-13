@@ -11,9 +11,11 @@ namespace WebApiToDo.ModelsDTO
         [Required]
         [StringLength(50)]
         public string Title { get; set; }
+
         [Required]
         [StringLength(1000)]
         public string Description { get; set; }
+
         [Required]
         public bool IsCompleted { get; set; }
     }

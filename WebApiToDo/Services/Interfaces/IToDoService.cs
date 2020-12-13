@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApiToDo.ModelsDTO;
 
-namespace WebApiToDo.Services.Interface
+namespace WebApiToDo.Services.Interfaces
 {
     public interface IToDoService
     {

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApiToDo.Models;
 using WebApiToDo.ModelsDTO;
-using WebApiToDo.Repositories.Interface;
-using WebApiToDo.Services.Interface;
+using WebApiToDo.Repositories.Interfaces;
+using WebApiToDo.Services.Interfaces;
 
 namespace WebApiToDo.Services
 {
@@ -21,21 +21,25 @@ namespace WebApiToDo.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 
         }
+
         public async Task<List<ToDoDTO>> GetAllAsync()
         {
             var toDoList = await _toDoRepository.ListAllAsync();
             return _mapper.Map<List<ToDoDTO>>(toDoList);
         }
+
         public async Task<List<ToDoDTO>> GetAllItemsFilterAsync(bool isCompleted)
         {
             var toDoList = await _toDoRepository.ListAllItemsFilterAsync(ConvertBoolToInt(isCompleted));
             return _mapper.Map<List<ToDoDTO>>(toDoList);
         }
+
         public async Task AddItemAsync(ToDoDTO todoModel)
         {
             var toDoModel = _mapper.Map<ToDoModel>(todoModel);
             await _toDoRepository.AddItemAsync(toDoModel);
         }
+
         public async Task<bool> DeleteItemAsync(int id)
         {
             var toDo = await _toDoRepository.FindItemByIDAsync(id);
@@ -46,12 +50,14 @@ namespace WebApiToDo.Services
             await _toDoRepository.DeleteItemAsync(toDo);
             return true;
         }
+
         public async Task UpdateItemAsync(int id, ToDoDTO todo)
         {
             var toDoModel = _mapper.Map<ToDoModel>(todo);
             toDoModel.Id = id;
             await _toDoRepository.UpdateToDoAsync(toDoModel);
         }
+
         private int ConvertBoolToInt(bool boolValue)
         {
             return Convert.ToInt32(boolValue);

@@ -7,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApiToDo.Models;
 using WebApiToDo.Repositories;
-using WebApiToDo.Repositories.Interface;
+using WebApiToDo.Repositories.Interfaces;
 using WebApiToDo.Services;
-using WebApiToDo.Services.Interface;
+using WebApiToDo.Services.Interfaces;
 
 
 namespace WebApiToDo

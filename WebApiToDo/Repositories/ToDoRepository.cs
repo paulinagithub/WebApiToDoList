@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApiToDo.Models;
-using WebApiToDo.Repositories.Interface;
+using WebApiToDo.Repositories.Interfaces;
 
 namespace WebApiToDo.Repositories
 {
@@ -13,6 +13,7 @@ namespace WebApiToDo.Repositories
     {
         private readonly ToDoDBContext _dbContext;
         private readonly ILogger<ToDoRepository> _logger;
+        
         public ToDoRepository(ToDoDBContext dbContext, ILogger<ToDoRepository> logger)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
@@ -23,15 +24,17 @@ namespace WebApiToDo.Repositories
         {
             return await _dbContext.ToDo.ToListAsync();
         }
+
         public async Task<List<ToDoModel>> ListAllItemsFilterAsync(int isCompleted)
         {
             return await _dbContext.ToDo.Where(w => w.IsCompleted == isCompleted).ToListAsync();
         }
+
         public async Task AddItemAsync(ToDoModel toDo)
         {
-            await _dbContext.ToDo.AddAsync(toDo);
             try
             {
+                await _dbContext.ToDo.AddAsync(toDo);
                 await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
@@ -40,11 +43,12 @@ namespace WebApiToDo.Repositories
                 throw ex;
             }
         }
+
         public async Task DeleteItemAsync(ToDoModel toDo)
         {
-            _dbContext.ToDo.Remove(toDo);
             try
             {
+                _dbContext.ToDo.Remove(toDo);
                 await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
@@ -53,15 +57,17 @@ namespace WebApiToDo.Repositories
                 throw ex;
             }
         }
+
         public async Task<ToDoModel> FindItemByIDAsync(int id)
         {
             return await _dbContext.ToDo.FindAsync(id);
         }
+
         public async Task UpdateToDoAsync(ToDoModel todo)
         {
-            _dbContext.ToDo.Update(todo);
             try
             {
+                _dbContext.ToDo.Update(todo);
                 await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateException ex)

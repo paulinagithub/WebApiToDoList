@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApiToDo.ModelsDTO;
-using WebApiToDo.Services.Interface;
+using WebApiToDo.Services.Interfaces;
 
 namespace WebApiToDo.Controllers
 {
@@ -19,19 +19,25 @@ namespace WebApiToDo.Controllers
         {
             _toDoService = toDoService;
         }
+
         [HttpGet]
+        [Route("/api/todo/")]
         public async Task<ActionResult<IEnumerable<ToDoDTO>>> GetAllItemsAsync()
         {
             var result = await _toDoService.GetAllAsync();
             return Ok(result);
         }
-        [HttpGet("{isCompleted}", Name = "byFilter")]
+
+        [HttpGet]
+        [Route("/api/todo/{isCompleted}")]
         public async Task<ActionResult<IEnumerable<ToDoDTO>>> GetAllItemsFilterAsync(bool isCompleted)
         {
             var result = await _toDoService.GetAllItemsFilterAsync(isCompleted);
             return Ok(result);
         }
+
         [HttpPost]
+        [Route("/api/todo")]
         public async Task<ActionResult> AddItemAsync(ToDoDTO toDoDTO)
         {
             if (!ModelState.IsValid)
@@ -40,10 +46,11 @@ namespace WebApiToDo.Controllers
             }
             
             await _toDoService.AddItemAsync(toDoDTO);
-            return Ok(toDoDTO);
-          
+            return Ok(toDoDTO);         
         }
-        [HttpDelete("{id}")]
+
+        [HttpDelete]
+        [Route("/api/todo/{id}")]
         public async Task<ActionResult> DeleteItemAsync(int id)
         {
             var result = await _toDoService.DeleteItemAsync(id);
@@ -53,7 +60,9 @@ namespace WebApiToDo.Controllers
             }
             return Ok();
         }
-        [HttpPut("{id}")]
+
+        [HttpPut]
+        [Route("/api/todo/{id}")]
         public async Task<IActionResult> UpdateItemAsync(int id, ToDoDTO toDoDTO)
         {
             if (!ModelState.IsValid)

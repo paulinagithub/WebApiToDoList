@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "G+wz8cTAvlC/IBOw/taJKIPPNkzGOrv+3lZ9UQolt/TpHc5G3kjMg7NgMKFrBXYfFtUX6aBM99U5sDGMQlauAA==",
+  "dgSpecHash": "J+X60+er8AX3RYILmNrTKytqsvDD5vgTSPg39ksQSdm/Kz2VzIaCjOrIQWvvHxGldsZ4/HyLhWNdhuJRGwI9dw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Paulina\\source\\repos\\WebApiToDo\\XUnitTest\\WebApiToDo.Test.csproj",
+  "projectFilePath": "C:\\Users\\Paulina\\source\\repos\\WebApiToDo\\XUnitTest\\WebApiToDoTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Paulina\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Paulina\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.0\\automapper.extensions.microsoft.dependencyinjection.8.1.0.nupkg.sha512",
