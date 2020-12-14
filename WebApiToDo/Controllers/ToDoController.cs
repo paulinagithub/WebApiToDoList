@@ -35,12 +35,7 @@ namespace WebApiToDo.Controllers
         [HttpPost]
         [Route("/todo")]
         public async Task<ActionResult> AddItemAsync(ToDoDTO toDoDTO)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            
+        {            
             await _toDoService.AddItemAsync(toDoDTO);
             return Ok(toDoDTO);         
         }
@@ -63,11 +58,6 @@ namespace WebApiToDo.Controllers
         [Route("/todo/{id}")]
         public async Task<IActionResult> UpdateItemAsync(int id, ToDoDTO toDoDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }  
-            
             await _toDoService.UpdateItemAsync(id, toDoDTO);
             return Ok(toDoDTO);           
         }
