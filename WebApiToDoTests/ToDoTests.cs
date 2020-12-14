@@ -44,7 +44,7 @@ namespace WebApiToDoTests
         }
 
         [Fact]
-        public void GetAllItemsWithTwoElements()
+        public void GetsAllItems()
         {
             // Arrange 
             _toDoRepositoryMock
@@ -63,7 +63,7 @@ namespace WebApiToDoTests
         }
 
         [Fact]
-        public void GetAllItemsWithFalseArgument()
+        public void GetsAllNotComplitedTodoItems()
         {
             // Arrange 
             var expectedValue = new List<ToDoModel>()
