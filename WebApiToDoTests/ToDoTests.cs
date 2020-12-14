@@ -87,7 +87,7 @@ namespace WebApiToDoTests
         }
 
         [Fact]
-        public void DeleteIfItemIsExist()
+        public void DeletesItemIfExist()
         {
             // Arrange 
             _toDoRepositoryMock
@@ -109,7 +109,7 @@ namespace WebApiToDoTests
         }
 
         [Fact]
-        public void DeleteIfItemIsNotExist()
+        public void DeletesItemIfDoesNotExist()
         {
             // Arrange 
             _toDoRepositoryMock
@@ -127,7 +127,7 @@ namespace WebApiToDoTests
         }
 
         [Fact]
-        public async void UpdateItemWithException()
+        public async void ThrowsExceptionIfDbUpdateFails()
         {
             // Arrange 
             _toDoRepositoryMock
